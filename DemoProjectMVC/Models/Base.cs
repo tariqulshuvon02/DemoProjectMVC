@@ -12,7 +12,6 @@ namespace DemoProjectMVC.Models
         [MaxLength(50)]
         [EmailAddress]
         public string Email { get; set; }= string.Empty;
-
         public int CreateBy { get; set; }
         public int UpdateBy { get; set; }
         public DateTimeOffset? CreateDate { get; set; }

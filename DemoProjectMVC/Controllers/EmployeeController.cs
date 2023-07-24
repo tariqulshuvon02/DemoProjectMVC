@@ -78,23 +78,29 @@ namespace DemoProjectMVC.Controllers
 
         }
 
-        public async Task<ActionResult> Details(int id)
+        public  ActionResult Details(int id)
         {
-            var employee = _conContext.Employees.Find(id);
+            var employee =  _conContext.Employees.Find(id);
             return View(employee);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> Delete(Employee employee)
+
+        public IActionResult Delete(int id)
         {
-            if (!ModelState.IsValid)
+            return View(_conContext.Employees.Find(id));
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var employe = _conContext.Employees.Find(id);
+            if (employe == null)
             {
+                _conContext.Employees.Find(id);
+                _conContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-
-            _conContext.Remove(employee);
-            _conContext.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return View(employe);
         }
 
 
